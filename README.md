@@ -17,14 +17,15 @@ Build an intelligent system that:
 - Streamlit
 - Scikit-learn (coming next)
 
+## 🚀 Features (Current)
+- Streamlit web app
+- Dataset overview page
+- Target distribution visualization
+- Data understanding and preprocessing setup
+
 ## ▶️ How to Run
 
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
 
-## 🚀 Features (Current)
-- Streamlit web app
-- Dataset overview page
-- Target distribution visualization
-- Data understanding and preprocessing setup
