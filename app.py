@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,confusion_matrix
 
 st.set_page_config(page_title="Machine Monitoring System", layout="wide")
 
@@ -100,3 +102,41 @@ st.write(
     "encoding categorical variables, and splitting into training and testing sets. "
     "Stratified sampling helps preserve the rare failure cases in both sets."
 )
+
+st.markdown("## Model Training and Evaluation")
+
+model = RandomForestClassifier(random_state=42, class_weight="balanced")
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, zero_division=0)
+recall = recall_score(y_test, y_pred, zero_division=0)
+f1 = f1_score(y_test, y_pred, zero_division=0)
+
+cm = confusion_matrix(y_test, y_pred)
+
+st.markdown("### Model Performance Metrics")
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("Accuracy", f"{accuracy:.2f}")
+c2.metric("Precision", f"{precision:.2f}")
+c3.metric("Recall", f"{recall:.2f}")
+c4.metric("F1 Score", f"{f1:.2f}")
+
+st.markdown("### Confusion Matrix")
+
+cm_df = pd.DataFrame(
+    cm,
+    index=["Actual Safe (0)", "Actual Failure (1)"],
+    columns=["Predicted Safe (0)", "Predicted Failure (1)"]
+)
+
+st.dataframe(cm_df)
+
+st.markdown("### What this means")
+st.write(
+    "The model predicts weather a machine will fail."
+    "Recall is important because it tells us how many actual failures we successfully detected."
+)
+
