@@ -22,6 +22,7 @@ Build an intelligent system that:
 - Dataset overview page
 - Target distribution visualization
 - Data understanding and preprocessing setup
+- Data preprocessing with encoding and stratified train-test split
 
 ## ▶️ How to Run
 
