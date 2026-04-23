@@ -29,4 +29,6 @@ Build an intelligent system that:
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
+or
+python -m streamlit run app.py
 
